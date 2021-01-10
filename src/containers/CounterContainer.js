@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { bindActionCreators } from "redux"; // **** (1) 불러오기
 import Counter from "../components/Counter";
 import { increment, decrement } from "../store/modules/counter";
 
@@ -28,9 +29,7 @@ const mapStateToProps = ({ counter }) => ({
   number: counter.number
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  increment: () => dispatch(increment()),
-  decrement: () => dispatch(decrement())
-});
+const mapDispatchToProps = (dispatch) =>
+  bindActionCreators({ increment, decrement }, dispatch); // **** (2) bindActionCreators 사용.
 
 export default connect(mapStateToProps, mapDispatchToProps)(CounterContainer);
